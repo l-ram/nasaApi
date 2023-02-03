@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react"
 import { IUseNasaApi } from "../types/IUseNasaApi"
 
-interface useNasaApi {
-    data: IUseNasaApi[];
-    loading: boolean;
-    error: string | null;
-}
-
 export default function UseNasaApi() {
+
 
     const count = 10;
     const apiKey = "COj1voW3jq3uvF44x8Me3mRWK0Sc3XKatQJTqZ92";

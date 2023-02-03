@@ -1,6 +1,6 @@
 import { Box, Grid, Typography, Skeleton, Button, Modal, Fade, Snackbar, IconButton, Card, CardMedia, CardContent } from "@mui/material";
 import { Close } from '@mui/icons-material'
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import useNasaApi from "../hooks/useNasaApi";
 import { IUseNasaApi } from "../types/IUseNasaApi";
 
@@ -36,14 +36,14 @@ export function Gallery(this: any) {
     }
 
     // Added to favourites pop-ip
-    const [openPopUp, setOpenPopuP] = useState(false);
+    const [openPopUp, setOpenPopUp] = useState(false);
 
     const handleClickPopUp = () => {
-        setOpenPopuP(true);
+        setOpenPopUp(true);
     };
 
     const handleClosePopUp = () => {
-        setOpenPopuP(false);
+        setOpenPopUp(false);
     };
 
     const action = (
@@ -54,7 +54,7 @@ export function Gallery(this: any) {
                 color="inherit"
                 onClick={handleClosePopUp}
             >
-                <Close fontSize="small" onClick={handleClosePopUp} />
+                <Close fontSize="small" />
             </IconButton>
         </>
     );
@@ -67,55 +67,21 @@ export function Gallery(this: any) {
         data.forEach((item) => {
             if (item.url.includes(url) && !favourites[url]) {
                 favourites[url] = item;
-                console.log(favourites);
                 localStorage.setItem('nasaFavourites', JSON.stringify(favourites));
             }
         });
+        return handleClickPopUp();
     };
 
-    // use local storage
-   ( () => {
+// use local storage
+   (() => {
         if (localStorage.getItem('nasaFavourites')) {
-            favourites = JSON.parse(localStorage.getItem('nasaFavourites')!);
-            console.log('favourites from localstorage', favourites)
+            favourites = JSON.parse(localStorage.getItem('nasaFavourites')||"{}");
         }
-    })();
+    } 
+    )();
 
-    // const elfFunctions: any = {
-    //     attack() {
-    //         return "attack with" + this.weapon
-    //     }
-    // }
-    // const createElf: any = (name: any, weapon: any) => {
-    //     let newElf = Object.create(elfFunctions)
-    //     newElf.name = name;
-    //     newElf.weapon = weapon;
-    //     return newElf;
-    // }
-
-    // const peter = createElf("Peter", "crossbow")
-    // console.log(peter.attack())
-
-    // // Constructor functions
-
-
-    // function Elf (name:string, weapon:string) {
-    //     this.name = name;
-    //     this.weapon = weapon;
-    // }
-
-    // Elf.prototype.attack= function() {
-    //     return "attack with " + this.weapon
-    // };
-
-    // const harhar = new Elf("Peter", "stones")
-    // console.log(harhar.attack());
-
-    // const errorMessage = () => {
-    //     if (error) {
-    //         error.
-    //     }
-    // }
+    console.log(favourites);
 
     return (
         <div>
@@ -198,24 +164,6 @@ export function Gallery(this: any) {
                                 message="Added to favourites!"
                                 action={action}
                             />
-
-                            {/* <div className="save-confirmed" hidden style={{
-                                background: 'white',
-                                paddingTop: '-5',
-                                borderRadius: 5,
-                                boxShadow: '0 4px 0 rgba(0,0,0,0.2)',
-                                transition: '0.3s',
-                                position: 'fixed',
-                                bottom: '25px',
-                                right: '50px'
-                            }}>
-                                <h6 style={{
-                                    color: '#000',
-                                    margin: 15,
-
-                                }}>Added to favourites!</h6>
-                            </div> */}
-
 
                         </>)
             }
