@@ -1,9 +1,6 @@
 
 import { Box, Button, Card, CardContent, CardMedia, Fade, Grid, Modal, Typography } from "@mui/material";
-import { get } from "https";
-import { useEffect, useState } from "react";
-import { IFavouritesLocalStorage } from "../types/IFavouritesLocalStorage";
-
+import { useState } from "react";
 
 
 export default function FavouritesPage() {
@@ -17,6 +14,7 @@ export default function FavouritesPage() {
     }
     )();
 
+    console.log(favourites);
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -40,9 +38,12 @@ const style = {
         window.open(url)
     }
 
-    const arrayOfFavourites = Object.keys(favourites);
-    console.log(arrayOfFavourites);
+    const arrayOfFavourites = Object.entries(favourites);
 
+    arrayOfFavourites.forEach(([key, value]) => {
+        console.log(key);
+        console.log(value);
+    })
 
     return (
         <div>
@@ -52,18 +53,18 @@ const style = {
                 alignContent={"center"}
                 spacing={3}
             >
-                {/* {arrayOfFavourites.map((nasa, key) => (
+                {arrayOfFavourites.map((nasa, key) => (
                     <Grid item xs={12} key={key}>
                         <Card sx={{ width: '100%', maxWidth: 800, margin: 'auto' }}>
                             <CardMedia
                                 component="img"
-                                src={nasa.url}
-                                onClick={() => { openInNewTab(nasa.) }}
+                                // src={}
+                                // onClick={() => { openInNewTab() }}
                             >
                             </CardMedia>
                             <CardContent>
-                                <Typography>{nasa.title}</Typography>
-                                <Typography>{`${nasa.explanation.substring(0, 100)}...`}</Typography>
+                                <Typography></Typography>
+                                <Typography>{`Explanation min 100 $...`}</Typography>
                                 <Button onClick={handleOpen}>Expand explanation</Button>
                                 <Modal
                                     aria-labelledby="transition-modal-title"
@@ -78,17 +79,17 @@ const style = {
                                                 Explanation
                                             </Typography>
                                             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                                                {nasa.explanation}
+                                                Explanation
                                             </Typography>
                                         </Box>
                                     </Fade>
                                 </Modal>
-                                <Typography>{nasa.date}</Typography>
-                                <Typography>{nasa.copyright}</Typography>
+                                <Typography>Date</Typography>
+                                <Typography>Copyright</Typography>
                             </CardContent>
                         </Card>
                     </Grid>
-                ))} */}
+                ))}
             </Grid>
 
         </div>

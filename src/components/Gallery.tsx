@@ -13,6 +13,8 @@ export function Gallery(this: any) {
         error
     } = useNasaApi();
 
+    console.log(data);
+
     // Modal
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
