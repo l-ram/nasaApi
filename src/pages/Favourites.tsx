@@ -24,7 +24,8 @@ export default function FavouritesPage() {
     }
     )();
 
-    console.log(favourites);
+    // Converting object to array
+    let arrayOfFavourites: IFavouritesArray[] = Object.values(favourites);
 
     const style = {
         position: 'absolute' as 'absolute',
@@ -49,9 +50,11 @@ export default function FavouritesPage() {
         window.open(url)
     }
 
-    // Converting object to array
+    // Remove from favourites LocalStorage
 
-    let arrayOfFavourites: IFavouritesArray[] = Object.values(favourites);
+    const removeFromLocalStorage = () => {
+
+    }
 
     return (
         <div>
@@ -82,6 +85,9 @@ export default function FavouritesPage() {
 
                                 <Typography>{nasa.date}</Typography>
                                 <Typography>{nasa.copyright}</Typography>
+                                <Button color="error" onClick={removeFromLocalStorage}>
+                                    Remove from favourites
+                                </Button>
                             </CardContent>
                         </Card>
                     </Grid>

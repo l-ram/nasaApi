@@ -7,14 +7,11 @@ import { useState } from 'react';
 import Favourites from './pages/Favourites';
 import { Route, Routes } from 'react-router-dom';
 
-
-
 const theme = createTheme({
   palette: {
     mode: "dark",
   }
 })
-
 
 function App() {
 

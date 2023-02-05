@@ -1,6 +1,6 @@
 import { Box, Grid, Typography, Skeleton, Button, Modal, Fade, Snackbar, IconButton, Card, CardMedia, CardContent } from "@mui/material";
 import { Close } from '@mui/icons-material'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useNasaApi from "../hooks/useNasaApi";
 import { IUseNasaApi } from "../types/IUseNasaApi";
 
@@ -13,10 +13,19 @@ export function Gallery(this: any) {
         error
     } = useNasaApi();
 
-    console.log(data);
+    // Set gallery data and add to gallery
+    const [galleryData, setGalleryData] = useState<IUseNasaApi[]>([]);
+
+    useEffect(()=> {
+        setGalleryData(data)
+    }, [loading]);
+
+    const loadMoreGalleryElements = () => {
+        setGalleryData(data);
+    }
 
     // Modal
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
     const [modalData, setModalData] = useState<string>("");
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -36,18 +45,12 @@ export function Gallery(this: any) {
     // Open Image OnClick function
     const openInNewTab = (url: string) => {
         window.open(url)
-    }
+    };
 
     // Added to favourites pop-ip
     const [openPopUp, setOpenPopUp] = useState(false);
-
-    const handleClickPopUp = () => {
-        setOpenPopUp(true);
-    };
-
-    const handleClosePopUp = () => {
-        setOpenPopUp(false);
-    };
+    const handleClickPopUp = () => { setOpenPopUp(true) };
+    const handleClosePopUp = () => { setOpenPopUp(false) };
 
     const action = (
         <>
@@ -109,7 +112,7 @@ export function Gallery(this: any) {
                                 alignContent={"center"}
                                 spacing={3}
                             >
-                                {data.map((nasa: IUseNasaApi, key) => (
+                                {galleryData.map((nasa: IUseNasaApi, key) => (
                                     <Grid item xs={12} key={key}>
                                         <Card sx={{ width: '100%', maxWidth: 800, margin: 'auto' }}>
                                             <CardMedia
@@ -160,7 +163,7 @@ export function Gallery(this: any) {
                             </Grid>
 
                             <Box sx={{ padding: 10 }}>
-                                <Button variant="outlined">Load more</Button>
+                                <Button variant="outlined" onClick={loadMoreGalleryElements}>Load new images</Button>
                             </Box>
 
                             <Snackbar
