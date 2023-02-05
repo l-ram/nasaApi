@@ -17,6 +17,7 @@ export function Gallery(this: any) {
 
     // Modal
     const [open, setOpen] = useState(false);
+    const [modalData, setModalData] = useState<string>("");
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -75,15 +76,13 @@ export function Gallery(this: any) {
         return handleClickPopUp();
     };
 
-// use local storage
-   (() => {
+    // use local storage
+    (() => {
         if (localStorage.getItem('nasaFavourites')) {
-            favourites = JSON.parse(localStorage.getItem('nasaFavourites')||"{}");
+            favourites = JSON.parse(localStorage.getItem('nasaFavourites') || "{}");
         }
-    } 
+    }
     )();
-
-    console.log(favourites);
 
     return (
         <div>
@@ -128,31 +127,36 @@ export function Gallery(this: any) {
                                                     }
                                                     }>Add to favourites</Button>
                                                 <Typography>{`${nasa.explanation.substring(0, 100)}...`}</Typography>
-                                                <Button onClick={handleOpen}>Expand explanation</Button>
-                                                <Modal
-                                                    aria-labelledby="transition-modal-title"
-                                                    aria-describedby="transition-modal-description"
-                                                    open={open}
-                                                    onClose={handleClose}
-                                                    closeAfterTransition
-                                                >
-                                                    <Fade in={open}>
-                                                        <Box sx={style}>
-                                                            <Typography id="transition-modal-title" variant="h6" component="h2">
-                                                                Explanation
-                                                            </Typography>
-                                                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                                                                {nasa.explanation}
-                                                            </Typography>
-                                                        </Box>
-                                                    </Fade>
-                                                </Modal>
+                                                <Button onClick={()=>{
+                                                    setModalData(nasa.explanation);
+                                                    handleOpen();
+                                                }}>
+                                                    Expand explanation
+                                                </Button>
                                                 <Typography>{nasa.date}</Typography>
                                                 <Typography>{nasa.copyright}</Typography>
                                             </CardContent>
                                         </Card>
                                     </Grid>
                                 ))}
+                                <Modal
+                                    aria-labelledby="transition-modal-title"
+                                    aria-describedby="transition-modal-description"
+                                    open={open}
+                                    onClose={handleClose}
+                                    closeAfterTransition
+                                >
+                                    <Fade in={open}>
+                                        <Box sx={style}>
+                                            <Typography id="transition-modal-title" variant="h6" component="h2">
+                                                Explanation
+                                            </Typography>
+                                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                                {modalData}
+                                            </Typography>
+                                        </Box>
+                                    </Fade>
+                                </Modal>
                             </Grid>
 
                             <Box sx={{ padding: 10 }}>

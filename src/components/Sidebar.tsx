@@ -1,6 +1,5 @@
-import { ThemeProvider, createTheme, AppBar, Typography, Box, IconButton, Toolbar, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, styled, ListItemText, useTheme } from '@mui/material';
-import { Favorite, Home, Login, Logout, ChevronLeft, ChevronRight } from '@mui/icons-material'
-import { Link } from 'react-router-dom';
+import { IconButton, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, styled, ListItemText, useTheme } from '@mui/material';
+import { Favorite, Home, Login, ChevronLeft, ChevronRight } from '@mui/icons-material'
 
 interface SideBarProps {
     openDraw: boolean;
