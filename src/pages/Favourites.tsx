@@ -32,7 +32,6 @@ export default function FavouritesPage() {
         }
     }
     // Converting object to array
-    let arrayOfFavourites: IFavouritesArray[] = Object.values(favourites);
 
     const style = {
             position: 'absolute' as 'absolute',
