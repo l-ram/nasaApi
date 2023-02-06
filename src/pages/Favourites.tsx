@@ -1,21 +1,13 @@
 
 import { Box, Button, Card, CardContent, CardMedia, Fade, Grid, Modal, Typography } from "@mui/material";
+import { url } from "inspector";
 import { useState } from "react";
 import { IFavouritesObject, IFavouritesArray } from "../types";
 
 
 export default function FavouritesPage() {
 
-    let favourites: IFavouritesObject = {
-        copyright: "",
-        date: "",
-        explanation: "",
-        hdurl: "",
-        media_type: "",
-        service_version: "",
-        title: "",
-        url: ""
-    };
+    let favourites: IFavouritesObject = {};
 
     (() => {
         if (localStorage.getItem('nasaFavourites')) {
@@ -23,6 +15,13 @@ export default function FavouritesPage() {
         }
     }
     )();
+
+    const removeFavourite = (url:string) => {
+        if (favourites[url]) {
+            delete favourites[url];
+            localStorage.setItem('nasaFavourites', JSON.stringify(favourites));
+        };
+    };
 
     console.log(favourites);
 
@@ -50,6 +49,7 @@ export default function FavouritesPage() {
     }
 
     // Converting object to array
+
 
     let arrayOfFavourites: IFavouritesArray[] = Object.values(favourites);
 
@@ -82,6 +82,11 @@ export default function FavouritesPage() {
 
                                 <Typography>{nasa.date}</Typography>
                                 <Typography>{nasa.copyright}</Typography>
+                                <Button data-button-key={nasa.url} color="error" onClick={(e) => {
+                                    removeFavourite(e.currentTarget.getAttribute("data-button-key")!);
+                                }}>
+                                    Remove from favourites
+                                </Button>
                             </CardContent>
                         </Card>
                     </Grid>

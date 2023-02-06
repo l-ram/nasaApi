@@ -13,8 +13,6 @@ export function Gallery(this: any) {
         error
     } = useNasaApi();
 
-    console.log(data);
-
     // Modal
     const [open, setOpen] = useState(false);
     const [modalData, setModalData] = useState<string>("");
@@ -160,7 +158,7 @@ export function Gallery(this: any) {
                             </Grid>
 
                             <Box sx={{ padding: 10 }}>
-                                <Button variant="outlined">Load more</Button>
+                                <Button variant="outlined">Load new photos</Button>
                             </Box>
 
                             <Snackbar

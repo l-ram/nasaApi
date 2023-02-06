@@ -7,14 +7,11 @@ import { useState } from 'react';
 import Favourites from './pages/Favourites';
 import { Route, Routes } from 'react-router-dom';
 
-
-
 const theme = createTheme({
   palette: {
     mode: "dark",
   }
 })
-
 
 function App() {
 
@@ -31,9 +28,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-
-
-
+        
         <ThemeProvider theme={theme}>
           <AppBar position='fixed'>
             <Toolbar>
