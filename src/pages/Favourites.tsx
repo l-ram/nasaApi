@@ -1,6 +1,6 @@
 
 import { Box, Button, Card, CardContent, CardMedia, Fade, Grid, Modal, Typography } from "@mui/material";
-import { url } from "inspector";
+import { Cancel } from '@mui/icons-material'
 import { useState } from "react";
 import { IFavouritesObject, IFavouritesArray } from "../types";
 
@@ -23,14 +23,6 @@ export default function FavouritesPage() {
         };
     };
 
-    const removeFromLocalStorage = (itemUrl: string) => {
-        //ts-ignore
-        if (itemUrl) {
-// Remove element from favourites OBJECT, then update the localstorage with the new Object
-            favourites = JSON.parse(localStorage.getItem('nasaFavourites') || "{}");
-            localStorage.removeItem('nasaFavourites');
-        }
-    }
     // Converting object to array
 
     const style = {
@@ -65,12 +57,13 @@ export default function FavouritesPage() {
             <div>
 
                 <Grid container
-                    padding={5}
+                    padding={6}
+                    marginTop={5}
                     alignContent={"center"}
                     spacing={3}
                 >
                     {arrayOfFavourites.map((nasa, key: number) => (
-                        <Grid item xs={3} key={key}>
+                        <Grid item xs={12} sm={6} md={4} key={key}>
                             <Card sx={{ width: '100%', maxWidth: 800, margin: 'auto' }}>
                                 <CardMedia
                                     component="img"
@@ -90,10 +83,10 @@ export default function FavouritesPage() {
 
                                 <Typography>{nasa.date}</Typography>
                                 <Typography>{nasa.copyright}</Typography>
-                                <Button data-button-key={nasa.url} color="error" onClick={(e) => {
+                                <Button size="small" data-button-key={nasa.url} color="error" onClick={(e) => {
                                     removeFavourite(e.currentTarget.getAttribute("data-button-key")!);
                                 }}>
-                                    Remove from favourites
+                                    <Cancel></Cancel>
                                 </Button>
                             </CardContent>
                         </Card>

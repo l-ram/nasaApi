@@ -1,5 +1,5 @@
 import { IconButton, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, styled, ListItemText, useTheme } from '@mui/material';
-import { Favorite, Home, Login, ChevronLeft, ChevronRight } from '@mui/icons-material'
+import { Favorite, Home, ChevronLeft, ChevronRight, Logout } from '@mui/icons-material'
 
 interface SideBarProps {
     openDraw: boolean;
@@ -73,9 +73,9 @@ export function Sidebar(props: SideBarProps) {
             <ListItem disablePadding>
                 <ListItemButton>
                     <ListItemIcon>
-                        <Login />
+                        <Logout />
                     </ListItemIcon>
-                    <ListItemText>Login</ListItemText>
+                    <ListItemText>Logout</ListItemText>
                 </ListItemButton>
             </ListItem>
 
